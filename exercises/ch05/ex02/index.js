@@ -1,4 +1,4 @@
-const sequ = ["\u{27}", "\u{5c}", "\u{22}"] //[", \, ']
+const sequ = ["\u{27}", "\u{5c}", "\u{22}"] //[", \, ','/b','t',...]
 // "aa\aa"のような一つバックスラッシュがある文字列は読み取れるか
 
 export function fun1(inputString) {
@@ -26,6 +26,8 @@ export function fun2(inputString) {
             case "\u{22}":
                 letter = "\u{5c}" + letter
                 break
+            // case "\t"
+            // case "\b"
             default:
                 break
         }
