@@ -1,6 +1,7 @@
 function fizzbuzz(n) {
     let array = new Array(n).fill(0)
     array = array.map((x, i) => x + i + 1)
+    // a.mapで入れ替え
     array.forEach(i => {
         i % 15 === 0 ? console.log("FizzBuzz") :
             i % 5 === 0 ? console.log("Fizz") : i % 3 === 0 ?
