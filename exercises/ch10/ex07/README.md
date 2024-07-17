@@ -1,5 +1,5 @@
 date-fns:\
-https://github.com/date-fns/date-fns/tree/main/src
+https://github.com/date-fns/date-fns/tree/main/src \
 ソースコードのsrcディレクトリの下に、各モジュールはそれぞれのフォルダーを持っている。\
 各モジュールのフォルダーには、`index.ts`と`test.ts`のファイルがある。`index.ts`に、それぞれのモジュールを定義してエクスポートする。\
 srcディレクトリの下の`index.ts`には、
@@ -21,10 +21,10 @@ endOfDay.mjs
 のように、各モジュールには4つのファイルが持っている。
 
 Luxon:\
-https://github.com/moment/luxon/tree/master/src　\
+https://github.com/moment/luxon/tree/master/src \
 srcディレクトリの下には、各モジュールのファイルがあり、\
 ファイルの数が少ないて、各ファイルの中身が多い。\
-luxon.jsには、それらのモジュールをインポートして、再エクスポートする。
+luxon.jsには、それらのモジュールをインポートして、再エクスポートする。\
 node_modules/luxon/srcには、ほぼソースコードのsrcと同じような感じ
 
 dayjs:\
