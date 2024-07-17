@@ -1254,6 +1254,16 @@
     "shebang-command" "^2.0.0"
     "which" "^2.0.1"
 
+"date-fns@^3.6.0":
+  "integrity" "sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww=="
+  "resolved" "https://registry.npmjs.org/date-fns/-/date-fns-3.6.0.tgz"
+  "version" "3.6.0"
+
+"dayjs@^1.11.11":
+  "integrity" "sha512-okzr3f11N6WuqYtZSvm+F776mB41wRZMhKP+hc34YdW+KmtYYK9iqvHSwo2k9FEH3fhGXvOPV6yz2IcSrfRUDg=="
+  "resolved" "https://registry.npmjs.org/dayjs/-/dayjs-1.11.11.tgz"
+  "version" "1.11.11"
+
 "debug@^4.1.0", "debug@^4.1.1", "debug@^4.3.1", "debug@^4.3.2":
   "integrity" "sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ=="
   "resolved" "https://registry.npmjs.org/debug/-/debug-4.3.4.tgz"
@@ -2353,6 +2363,11 @@
   "version" "6.0.0"
   dependencies:
     "yallist" "^4.0.0"
+
+"luxon@^3.4.4":
+  "integrity" "sha512-zobTr7akeGHnv7eBOXcRgMeCP6+uyYsczwmeRCauvpvaAltgNyTbLH/+VaEAPUeWBT+1GuNmz4wC/6jtQzbbVA=="
+  "resolved" "https://registry.npmjs.org/luxon/-/luxon-3.4.4.tgz"
+  "version" "3.4.4"
 
 "make-dir@^4.0.0":
   "integrity" "sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw=="
