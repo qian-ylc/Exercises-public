@@ -1,6 +1,8 @@
 export function detectFileType(data) { // data.buffer
     const view = new DataView(data);
-    const signature = view.getUint32(0, true); // 先頭4バイトを取得
+    // true: 0x46445025 false: 0x25504446
+    const signature = view.getUint32(0, false); // 先頭4バイトを取得 ビッグエンディアン 
+    console.log(signature);
     switch (signature) {
         case 0x25504446:
             return "PDF";
