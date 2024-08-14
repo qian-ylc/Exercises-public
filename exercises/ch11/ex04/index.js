@@ -1,5 +1,5 @@
 // これから (N, K) と (K, M) の行列の乗算を行う (この値は色々変更して試すこと)
-const [N, K, M] = [3, 5, 2];
+const [N, K, M] = [30, 50, 20];
 
 // 配列版: (N, K) の行列を要素数 N * K の1次元配列で表現する ((i, j) は array[K * i + j] で参照)
 const lhsA = Array(N * K).fill(0.0).map(() => Math.random());

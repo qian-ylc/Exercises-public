@@ -2,3 +2,5 @@ https://www.google.com/search?q=babel&oq=babel&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORiAB
 RequireJS: AMDペースのモジュールシステム \
 Webpack: オープンソースのモジュールバンドラー \
 Babel: コンパイラ
+
+AMD UMD

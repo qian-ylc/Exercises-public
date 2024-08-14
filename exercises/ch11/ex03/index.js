@@ -5,8 +5,8 @@ export function littleToBig(array) {
         array.byteOffset,
         array.byteLength);
     for (let i = 0; i < array.buffer.byteLength; i += 4) {
-        let little = view.getUint32(i, true); // リトルエンディアンのバイト列として引数のデータを読み込み?
-        view.setUint32(i, little, false);
+        let little = view.setUint32(i, true); // リトルエンディアンのバイト列として引数のデータを読み込み?
+        view.getUint32(i, little, false);
     }
     return array
 }
@@ -16,8 +16,8 @@ export function bigToLittle(array) {
         array.byteOffset,
         array.byteLength);
     for (let i = 0; i < array.buffer.byteLength; i += 4) {
-        let big = view.getUint32(i, false); // ビッグエンディアンのバイト列として引数のデータを読み込み?
-        view.setUint32(i, big, true);
+        let big = view.setUint32(i, false); // ビッグエンディアンのバイト列として引数のデータを読み込み?
+        view.getUint32(i, big, true);
     }
     return array
 }
