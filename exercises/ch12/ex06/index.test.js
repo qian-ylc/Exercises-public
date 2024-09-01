@@ -1,14 +1,16 @@
+// npx jest ch12/ex06/index.test.js
+
 describe("walk", () => {
     const { walk } = require("./index.js");
 
     it("testフォルダを探索", () => {
         let rootPath = "ch12/ex06/test"
         let walker = walk(rootPath);
-        expect(walker.next().value).toBe("ch12/ex06/test/test2");
-        expect(walker.next().value).toBe("ch12/ex06/test/test2/testfile1.md");
-        expect(walker.next().value).toBe("ch12/ex06/test/test2/testfile2.js");
-        expect(walker.next().value).toBe("ch12/ex06/test/test3");
-        expect(walker.next().value).toBe("ch12/ex06/test/test3/testfile3.md");
+        expect(walker.next().value).toBe('{ path: "ch12/ex06/test/test2", isDirectory: true }');
+        expect(walker.next().value).toBe('{ path: "ch12/ex06/test/test2/testfile1.md", isDirectory: false }');
+        expect(walker.next().value).toBe('{ path: "ch12/ex06/test/test2/testfile2.js", isDirectory: false }');
+        expect(walker.next().value).toBe('{ path: "ch12/ex06/test/test3", isDirectory: true }');
+        expect(walker.next().value).toBe('{ path: "ch12/ex06/test/test3/testfile3.md", isDirectory: false }');
         expect(walker.next().done).toBe(true);
     })
     it("空フォルダの場合", () => {

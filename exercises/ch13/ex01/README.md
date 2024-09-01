@@ -1,5 +1,8 @@
 予想：何も出力しない
 実際：コードがずっとwhile(true)に中に動いている、何も出力しなかった。
-そして、control+cを押した後、「"Hello, world!"」を出力した。（REPL環境）
 
-このケースは、longRunningFunction()がタスクキューに入れられて、setTimeout()のコールバックはマイクロタスクキューに入れられた。longRunningFunction()がcontrol+cで強制中止した後、マイクロタスクキューにあるsetTimeout()を処理
+> setTimeout() または setInterval() で作成したタイムアウトまたはインターバルに達すると、対応するコールバックがタスクキューに追加されます
+
+このケースは、setTimeout()のコールバック関数は1000ms後にタスクキューに追加される。\
+まずはlongRunningFunction()がタスクキューに追加され実行されるが、無限ループになる。\
+結果として、setTimeout()のコールバック関数がタスクキューに追加されるや実行されることができなくなる。
