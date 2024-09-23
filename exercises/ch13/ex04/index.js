@@ -7,9 +7,9 @@ export function fetchFirstFileSize(path) {
     let result = fsPromises.readdir(path)
         .then((files) => { //files.length === 0 と正常処理
             if (files.length === 0) {
-                throw new Error("files.length === 0");
+                return null
             }
-            return fsPromises.stat(join(path, files[0]))
+            return fsPromises.stat(join(path, files[0])).then(stats => stats.size)
         })
         // fsPromises.stat(join(path, files[0]))の結果をcallbackに渡す
         .catch(err => { throw (err) })
@@ -38,26 +38,26 @@ export function fetchFirstFileSize(path) {
 export async function fetchSumOfFileSizes(path) {
     return fsPromises.readdir(path)
         .then((files) => {
-            let total = 0;
-            const rest = [...files];
-            // iter()の処理？
-            function iter() {
-                if (rest.length === 0) {
-                    return total;
-                }
+            return new Promise(resolve => {
+                let total = 0;
+                const rest = [...files];
+                // iter()の処理？
+                function iter() {
+                    if (rest.length === 0) {
+                        resolve(total);
+                        return;
+                    }
 
-                const next = rest.pop();
-                fsPromises.stat(join(path, next)).then((stats) => {
-                    total += stats.size;
-                    iter();
-                })
-            };
+                    const next = rest.pop();
+                    fsPromises.stat(join(path, next)).then((stats) => {
+                        total += stats.size;
+                        iter();
+                    })
+                };
 
-            iter();
+                return iter();
+            })
         })
-        .catch(err => { throw err })
-
-    // fs.readdir(path, (err, files) => {
     //     if (err) {
     //         callback(err);
     //         return;
