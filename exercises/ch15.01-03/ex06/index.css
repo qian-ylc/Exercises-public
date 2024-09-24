@@ -1,0 +1,29 @@
+h1,
+h2 {
+    color: red
+}
+
+h1 {
+    text-shadow: 2px 2px 10px #FF0000;
+}
+
+table {
+    border: 2px solid orange;
+    width: 100%;
+}
+
+th,
+td {
+    border: 1px solid orange;
+    padding: 10px;
+}
+
+th {
+    background-color: orange;
+    color: white;
+    height: 50px;
+}
+
+td {
+    background-color: yellow;
+}
