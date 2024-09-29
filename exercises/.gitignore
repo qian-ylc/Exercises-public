@@ -4,3 +4,4 @@ node_modules
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+exercises/ch15.01-03/ex12/index.js
