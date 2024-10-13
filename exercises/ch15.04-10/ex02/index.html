@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title>Simple ToDo</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="./index.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body class="bg-orange-50 flex flex-col items-center p-6 px-4">
+    <h1 class="text-3xl font-bold mb-6 text-brown-700">ToDoリスト</h1>
+    <form id="new-todo-form" class="flex mb-4 w-full max-w-md">
+        <input type="text" id="new-todo" placeholder="何をしますか？"
+            class="flex-grow p-3 border-2 border-orange-400 rounded-l-md focus:outline-none focus:ring-2 focus:ring-orange-600" />
+        <button class="bg-orange-500 text-white p-3 rounded-r-md hover:bg-orange-600 transition">追加</button>
+    </form>
+    <ul id="todo-list" class="w-full max-w-md">
+        <!-- JavaScriptで動的に追加されるタスクがここに入ります -->
+    </ul>
+
+    <template id="todo-template">
+        <li
+            class="flex items-center justify-between bg-white shadow-md rounded-md p-3 mb-2 border-l-4 border-orange-500">
+            <div class="flex items-center">
+                <input class="toggle mr-3" type="checkbox" />
+                <label class="content text-brown-800"></label>
+            </div>
+            <button class="destroy text-red-500 hover:text-red-700 transition">❌</button>
+        </li>
+    </template>
+</body>
+
+</html>

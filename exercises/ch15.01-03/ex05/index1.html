@@ -4,10 +4,12 @@
 <!-- default: scriptがheadの中にあるため、bodyのdivはまたパースされない。
  jsファイルを読み込んで実行してもHelloが表示されない。
  asyncやdeferを追加：scriptが非同期で読み込まれるため、他のHTML要素のレンダリングがブロックされない
+ deferがより先
 -->
 <!-- addEventListener: 直接実行ではなく、イベントリスナーを追加して、
  doncontentloaded/loadイベントが発生したときに実行される
  domcontentloadedはより先に？
+ loadで全部のライブラリが読み込まれるまで待つことができるので、loadでないとうまくいかないことがあるので、loadが必要
 -->
 
 <head>

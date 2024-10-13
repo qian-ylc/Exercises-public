@@ -1,0 +1,91 @@
+/* 秋の季節の雰囲気を感じられるように、CSS を変更して見栄えを良くしてください。 */
+
+/* ページの背景色、フォントとレイアウトを調整 */
+body {
+    font-family: 'Arial', sans-serif;
+    /* 薄いクリーム色 */
+    background-color: #f9f3e9;
+    /* 深い茶色 */
+    color: #5b4b29;
+    /* デフォルトは8px */
+    margin: 0;
+    padding: 20px;
+}
+
+form {
+    /* 入力エリアの位置を調整 */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* 入力欄の枠線の色、角を丸める。文字のサイズ、Addボタンとの距離を調整 */
+input[type="text"] {
+    padding: 10px;
+    border: 2px solid #a65e2e;
+    /* 秋のオレンジ */
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+/* Addボタンの色、Add文字の色、枠線を消す、パディングを調整　*/
+button {
+    background-color: #d89a5b;
+    /* 温かみのあるオレンジ */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* hoverのときの動作：0.3sでボタンの色を変える */
+button:hover {
+    background-color: #b86a3a;
+    /* ホバー時の色 */
+}
+
+/* デフォルト値: disc 20*/
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* 枠線の色と丸め */
+/* margin: リスト中のものの間隔を調整 padding: 内部の文字と枠線との距離 */
+li {
+    background: #fff9e6;
+    /* 明るいクリーム色 */
+    border: 1px solid #d2b400;
+    /* 秋の黄色 */
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* チェックボックスと隣の要素の(Todo事項の文字)の距離 */
+.toggle {
+    margin-right: 10px;
+}
+
+/* destoryボタンはbuttonのため、.buttonのbackgroundに影響される。ここで消す */
+.destroy {
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* 完了したタスクの文字の色と消し線 */
+.completed .content {
+    text-decoration: line-through;
+    color: #9e9e9e;
+}
+
+/* 完了したタスクの背景色 */
+.completed {
+    background-color: #f0f0f0;
+}
