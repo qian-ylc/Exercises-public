@@ -7,10 +7,7 @@ const template = document.querySelector("#todo-template");
 const todos = [];
 
 function renderTodos(todos) {
-    console.log(todos)
     list.innerHTML = "";
-    const hash = location.hash;
-
     todos.forEach((todo, index) => {
         const clone = template.content.cloneNode(true);
         const li = clone.querySelector("li");
@@ -21,19 +18,10 @@ function renderTodos(todos) {
         li.classList.toggle("completed", todo.completed);
         toggle.addEventListener("change", () => {
             todo.completed = toggle.checked;
-            // Activeの場合、チェックつけたものをCompletedに移動
-            // Completedの場合、チェック外したものをActiveに移動
-            if (hash === '#/active' && todo.completed) {
-                todos.splice(index, 1);
-            } else if (hash === '#/completed' && !todo.completed) {
-                todos.splice(index, 1);
-            }
             renderTodos(todos);
         });
         label.textContent = todo.content;
         toggle.checked = todo.completed;
-
-        // ActiveやCompletedに実行された削除操作がAllにも反映させるため、フルtodoをアクセス必要がありそう
         destroy.addEventListener("click", () => {
             todos.splice(index, 1);
             renderTodos(todos);
@@ -55,14 +43,20 @@ form.addEventListener("submit", (e) => {
     renderTodos(todos);
 });
 
-window.addEventListener("hashchange", () => {
-    // ここを実装してね
-    const hash = location.hash;
-    if (hash === '#/active') {
-        renderTodos(todos.filter(todo => !todo.completed));
-    } else if (hash === '#/completed') {
-        renderTodos(todos.filter(todo => todo.completed));
-    } else {
-        renderTodos(todos);
-    }
+document.querySelector("#all").addEventListener("click", (e) => {
+    e.preventDefault();
+    window.history.pushState(null, "", "/ch15.04-10/ex12/all");
+    renderTodos(todos);
+});
+
+document.querySelector("#active").addEventListener("click", (e) => {
+    e.preventDefault();
+    window.history.pushState(null, "", "/ch15.04-10/ex12/active");
+    renderTodos(todos.filter((todo) => !todo.completed));
+});
+
+document.querySelector("#completed").addEventListener("click", (e) => {
+    e.preventDefault();
+    window.history.pushState(null, "", "/ch15.04-10/ex12/completed");
+    renderTodos(todos.filter((todo) => todo.completed));
 });
