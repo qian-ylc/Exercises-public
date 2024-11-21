@@ -6,15 +6,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     // TODO: ここで API を呼び出してタスク一覧を取得し、
     // 成功したら取得したタスクを appendToDoItem で ToDo リストの要素として追加しなさい
 
-    let response = await fetch('/api/tasks');
-    if (!response.ok) {
-        let message = await response.json()
-        alert(message.message);
-    } else {
-        let tasks = await response.json(); // bodyを読み出す
-        tasks.items.forEach(task => {
-            appendToDoItem(task);
-        });
+    // modeとcredentialsを指定してfetchを行う
+    try {
+        let response = await fetch('http://localhost:3001/api/tasks', { mode: 'cors', credentials: 'include' });
+        if (!response.ok) {
+            let message = await response.json()
+            alert(message.message);
+        } else {
+            let tasks = await response.json(); // bodyを読み出す
+            tasks.items.forEach(task => {
+                appendToDoItem(task);
+            });
+        }
+    } catch (e) {
+        alert(e);
     }
 });
 
@@ -34,13 +39,17 @@ form.addEventListener("submit", async (e) => {
 
     // TODO: ここで API を呼び出して新しいタスクを作成し
     // 成功したら作成したタスクを appendToDoItem で ToDo リストの要素として追加しなさい
-    let response = await fetch("/api/tasks", { method: "POST", body: JSON.stringify({ name: todo }) });
-    if (!response.ok) {
-        let message = await response.json()
-        alert(message.message);
-    } else {
-        let task = await response.json();
-        appendToDoItem(task);
+    try {
+        let response = await fetch("http://localhost:3001/api/tasks", { mode: 'cors', credentials: 'include', method: "POST", body: JSON.stringify({ name: todo }) });
+        if (!response.ok) {
+            let message = await response.json()
+            alert(message.message);
+        } else {
+            let task = await response.json();
+            appendToDoItem(task);
+        }
+    } catch (e) {
+        alert(e);
     }
 
 });
@@ -73,12 +82,16 @@ function appendToDoItem(task) {
         } else {
             status = "active";
         }
-        let response = await fetch(`/api/tasks/${task.id}`, { method: "PATCH", body: JSON.stringify({ status: status }) });
-        if (!response.ok) {
-            let message = await response.json()
-            alert(message.message);
-        } else {
-            label.style.textDecorationLine = toggle.checked ? "line-through" : "none";
+        try {
+            let response = await fetch(`http://localhost:3001/api/tasks/${task.id}`, { mode: 'cors', credentials: 'include', method: "PATCH", body: JSON.stringify({ status: status }) });
+            if (!response.ok) {
+                let message = await response.json()
+                alert(message.message);
+            } else {
+                label.style.textDecorationLine = toggle.checked ? "line-through" : "none";
+            }
+        } catch (e) {
+            alert(e);
         }
     });
 
@@ -88,11 +101,15 @@ function appendToDoItem(task) {
     // 成功したら elem を削除しなさい
     destroy.textContent = "削除";
     destroy.addEventListener("click", async () => {
-        let response = await fetch(`/api/tasks/${task.id}`, { method: "DELETE" });
-        if (!response.ok) {
-            alert(response.error);
-        } else {
-            elem.remove();
+        try {
+            let response = await fetch(`http://localhost:3001/api/tasks/${task.id}`, { mode: 'cors', credentials: 'include', method: "DELETE" });
+            if (!response.ok) {
+                alert(response.error);
+            } else {
+                elem.remove();
+            }
+        } catch (e) {
+            alert(e);
         }
     });
 

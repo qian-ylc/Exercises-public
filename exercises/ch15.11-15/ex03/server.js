@@ -243,7 +243,12 @@ function cookieAuthzMiddleware(_url, req, res, params) {
 // CORS のヘッダを返すミドルウェア
 function corsMiddleware(_url, _req, res) {
     // TODO: CORS に必要なヘッダを複数設定する
-    res.setHeader("TODO", "TODO");
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    // cookie関連
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader(
+        "Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE, PATCH"
+    )
     return true;
 }
 
@@ -348,7 +353,7 @@ async function main() {
         .createServer(async function (req, res) {
             await routes(
                 // TODO: この行のコメントを外す
-                // ["OPTIONS", "/api/*", nopHandler, cors],
+                ["OPTIONS", "/api/*", nopHandler, cors],
                 ["GET", "/api/tasks", listTasksHandler, authz, cors],
                 ["GET", "/api/tasks/{id}", getTaskHandler, authz, cors],
                 ["POST", "/api/tasks", createTaskHandler, authz, cors],
@@ -357,6 +362,7 @@ async function main() {
             )(req, res);
         })
         .listen(3001);
+
     console.log("Contents server running at http://localhost:3000/");
     console.log("API server running at http://localhost:3001/");
 }
