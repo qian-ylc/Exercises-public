@@ -46,7 +46,11 @@ function queryToDo(page, index) {
 
 test.describe("リロードしても、todo-listの内容が維持される", () => {
     test.beforeEach(async ({ page }) => {
-        await page.goto("/ch15.11-15/ex04");
+        await page.goto("/ch15.11-15/ex05");
+    });
+    test("何もToDoを追加していない場合、リロードしてもtodo-listは空のまま", async ({ page }) => {
+        await page.reload();
+        expect(await countToDos(page)).toBe(0);
     });
     test("リロードしても、todo-listの内容が維持される", async ({ page }) => {
         await addToDo(page, "todo1");
@@ -63,20 +67,9 @@ test.describe("リロードしても、todo-listの内容が維持される", ()
         await checkToDo(page, 0);
         await deleteToDo(page, 0);
         await page.close();
-        const newPage = await page.context().newPage();
-        await newPage.goto("/ch15.11-15/ex04");
-        expect(await countToDos(newPage)).toBe(1);
-        expect(await queryToDo(newPage, 0).textContent()).toContain("todo2");
+        page = await page.context().newPage();
+        await page.goto("/ch15.11-15/ex05");
+        expect(await countToDos(page)).toBe(1);
+        expect(await queryToDo(page, 0).textContent()).toContain("todo2");
     });
-    test("あるタブでの変更が他のタブにも自動的に反映される", async ({ page }) => {
-        const page2 = await page.context().newPage();
-        await page2.goto("/ch15.11-15/ex04");
-        await addToDo(page, "todo1");
-        await addToDo(page, "todo2");
-        await checkToDo(page, 0);
-        await deleteToDo(page, 0);
-        expect(await countToDos(page2)).toBe(1);
-        expect(await queryToDo(page2, 0).textContent()).toContain("todo2");
-    });
-
 })
