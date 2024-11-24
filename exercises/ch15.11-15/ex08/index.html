@@ -1,0 +1,34 @@
+<!-- リクエストの送信とレスポンスの確認が可能な Web ページ
+リクエスト本文の入力欄を複数用意し、ボタン押下時に sendRequest 関数でを同時にリクエストを送信するできるようにする
+時間内にレスポンスが返った場合はレスポンス本文を、エラーまたはタイムアウトが発生した場合はその内容を、対応するリクエスト入力欄の横または下に表示する -->
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>リクエスト送信</title>
+    <script type="module" src="./index.js"></script>
+</head>
+
+<body>
+    <h1>リクエスト送信</h1>
+    <form id="request-form">
+        <div>
+            <label for="request1">リクエスト1</label>
+            <input type="text" id="request1" name="request1">
+            <label for="response1" id="response1"></label>
+        </div>
+        <div>
+            <label for="request2">リクエスト2</label>
+            <input type="text" id="request2" name="request2">
+            <label for="response2" id="response2"></label>
+        </div>
+        <div>
+            <label for="request3">リクエスト3</label>
+            <input type="text" id="request3" name="request3">
+            <label for="response3" id="response3"></label>
+        </div>
+        <button type="submit" id="send-button">リクエスト送信</button>
+    </form>
+</body>
