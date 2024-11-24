@@ -20,5 +20,8 @@
     "serve": "^14.2.3",
     "tailwindcss": "^3.4.13"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
 }
