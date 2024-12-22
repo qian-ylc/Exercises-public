@@ -1,5 +1,4 @@
 import * as iconv from "iconv-lite";
-import { read } from "node:fs";
 import * as fsPromises from "node:fs/promises";
 
 // hello.txtを読み込む
