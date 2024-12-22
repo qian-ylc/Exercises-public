@@ -1,0 +1,44 @@
+### 1
+- 標準入力
+  - https://e-words.jp/w/%E6%A8%99%E6%BA%96%E5%85%A5%E5%8A%9B.html
+  - standard input stdin
+  - コンピュータ上で実行されているプログラムが、特に何も指定されていない場合に標準的に利用するデータ入力元
+- 標準出力
+  - https://e-words.jp/w/%E6%A8%99%E6%BA%96%E5%87%BA%E5%8A%9B.html
+  - standard output stdout
+  - コンピュータ上で実行されているプログラムが、特に何も指定されていない場合に標準的に利用するデータ出力先
+- 標準エラー出力
+  - https://e-words.jp/w/%E6%A8%99%E6%BA%96%E3%82%A8%E3%83%A9%E3%83%BC%E5%87%BA%E5%8A%9B.html
+  - standard error outpu stderr
+  - コンピュータ上で実行されているプログラムが、特に何も指定されていない場合に標準的に利用するエラー出力先
+- リダイレクト
+  - https://tech-lab.sios.jp/archives/42701
+  - コマンドの出力先を別の出力先 (ファイルなど) に変更することができる仕組み
+  - “>”などで表現　`# ls > /tmp/file.txt`
+- パイプ
+  - https://tech-lab.sios.jp/archives/42701
+  - コマンドの出力を別のコマンドの入力として扱う仕組み
+  - “|” で表現 `# cat text.txt | grep aaa`
+
+### 2
+- `node cat.mjs`
+  - 予測：`process.stdin.pipe(process.stdout)`で、入力されたものをそのまま出力
+  - 実際：入力された内容はそのまま出力される
+- `echo FOO | node cat.mjs`
+  - 予測：パイプで、FOOはstdinとなる。FOOを出力
+  - 実際：FOOは出力される
+- `node cat.mjs > output.txt`
+  - 予測：`output.txt`を作成し、ターミナルに入力された内容は`output.txt`に書き込む
+  - 実際：ターミナルに入力された内容は`output.txt`に書き込まれた
+- `node cat.mjs file`
+  - 予測：`file.txt`の内容は`cat.mjs`の入力になって、出力される
+  - 実際：`file.txt`の内容が出力された
+- `node cat.mjs file > output.txt`
+  - 予測：`file.txt`の内容は`cat.mjs`の入力になって、そして`file.txt`の内容は`cat.mjs`の出力になって、`output.txt`に書き込む
+  - 実際：`output.txt`の内容は`file.txt`と同じになった
+- `node cat.mjs invalid-file > output.txt`
+  - 予測：`invaild-file`は入力にならないため、エラーになる
+  - 実際：`Error: ENOENT: no such file or directory, open 'invalid-file'`となった
+- `node cat.mjs invalid-file 2> error.txt`
+  - 予測：`invaild-file`によるエラーのメッセージは`error.txt`に書き込む
+  - 実際：`error.txt`にはエラーメッセージがある

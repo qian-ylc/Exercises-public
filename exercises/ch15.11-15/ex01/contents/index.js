@@ -73,32 +73,33 @@ function appendToDoItem(task) {
         } else {
             status = "active";
         }
-        let response = await fetch(`/api/tasks/${task.id}`, { method: "PATCH", body: JSON.stringify({ status: status }) });
-        if (!response.ok) {
-            let message = await response.json()
-            alert(message.message);
-        } else {
-            label.style.textDecorationLine = toggle.checked ? "line-through" : "none";
-        }
+        let response = await `/api/tasks/${task.id}`, { method: "PATCH", body: JSON.stringify({ status: status })
     });
+    if (!response.ok) {
+        let message = await response.json()
+        alert(message.message);
+    } else {
+        label.style.textDecorationLine = toggle.checked ? "line-through" : "none";
+    }
+});
 
 
-    const destroy = document.createElement("button");
-    // TODO: destroy がクリック (click) された場合に API を呼び出してタスク を削除し
-    // 成功したら elem を削除しなさい
-    destroy.textContent = "削除";
-    destroy.addEventListener("click", async () => {
-        let response = await fetch(`/api/tasks/${task.id}`, { method: "DELETE" });
-        if (!response.ok) {
-            alert(response.error);
-        } else {
-            elem.remove();
-        }
-    });
+const destroy = document.createElement("button");
+// TODO: destroy がクリック (click) された場合に API を呼び出してタスク を削除し
+// 成功したら elem を削除しなさい
+destroy.textContent = "削除";
+destroy.addEventListener("click", async () => {
+    let response = await fetch(`/api/tasks/${task.id}`, { method: "DELETE" });
+    if (!response.ok) {
+        alert(response.error);
+    } else {
+        elem.remove();
+    }
+});
 
-    // TODO: elem 内に toggle, label, destroy を追加しなさい
-    elem.appendChild(toggle);
-    elem.appendChild(label);
-    elem.appendChild(destroy);
-    list.prepend(elem);
+// TODO: elem 内に toggle, label, destroy を追加しなさい
+elem.appendChild(toggle);
+elem.appendChild(label);
+elem.appendChild(destroy);
+list.prepend(elem);
 }

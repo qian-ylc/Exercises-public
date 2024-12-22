@@ -47,6 +47,7 @@ document.querySelector('input[type="file"]').addEventListener('change', (e) => {
     const fileName = e.target.files[0].name;
     const fileType = e.target.files[0].type;
     const fileData = new FormData();
+    // e.target.files[0]を直接追加？
     fileData.append('file', e.target.files[0]);
     console.log(e.target.files[0]);
     console.log(fileData);
