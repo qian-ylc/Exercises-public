@@ -21,13 +21,34 @@ async function startChild() {
 
     child.stderr.on("data", (data) => {
         console.error(`stderr: ${data}`);
+        startChild()
     });
 
     return new Promise((res) => {
         child.on("close", (code, signal) => {
             res([code, signal]);
+            // 子プロセスが異常終了した場合、再起動する
+            // closeの場合いつもprocess.exit(1)?
+            if (signal) {
+                console.log(`子プロセスがシグナル ${signal} によって終了`);
+                process.exit(1);
+            } else if (code !== 0) {
+                startChild();
+            }
         });
     });
 }
 
 // TODO: ここに処理を書く
+// シグナルをトラップして子プロセスに通知する
+// control+c: SIGINT
+['SIGINT', 'SIGTERM'].forEach(signal => {
+    process.on(signal, () => {
+        console.log(`シグナル ${signal} `);
+        if (child) {
+            child.kill(signal);
+        }
+    });
+});
+
+startChild()
