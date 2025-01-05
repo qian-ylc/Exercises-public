@@ -2,6 +2,7 @@ import fs from "fs";
 import readline from "readline";
 import { spawn } from "child_process";
 import { PassThrough } from "stream";
+import path from "path";
 
 // コマンドの実行
 class ExecCmd {
@@ -41,6 +42,8 @@ class PipeCmd {
 
 // コマンドを実行する関数
 async function runcmd(cmd, stdin = null, stdout = null) {
+    console.log("cmd: ", cmd)
+    console.log("stdin stdout: ", cmd.stdin, cmd.stdout)
     switch (cmd.type) {
         case " ": // ExecCmd
             await new Promise((resolve, reject) => {
@@ -69,6 +72,17 @@ async function runcmd(cmd, stdin = null, stdout = null) {
             {
                 // FIXME: ここを実装してね (2行程度)
                 // HINT: cmd.file のストリームを createWriteStream で作成し runcmd を再帰的に呼び出す
+                const cmdfilename = cmd.file;
+                const filepath = path.resolve("/Users/qian/exercises-public/exercises/ch16/ex13", cmdfilename)
+                const stream = fs.createWriteStream(filepath)
+                // for (let i = 1; i < cmd.cmd.argv.length; i++) {
+                //     stream.write(cmd.cmd.argv[i])
+                //     stream.write(" ")
+                // }
+                // streamをstdoutに -> case " " パイプ作成
+                await runcmd(cmd.cmd, null, stream);
+                console.log(">: ", cmd.cmd)
+                stream.end();
             }
             break;
 
@@ -76,6 +90,13 @@ async function runcmd(cmd, stdin = null, stdout = null) {
             {
                 // FIXME: ここを実装してね (2行程度)
                 // HINT: cmd.file のストリームを createReadStream で作成し runcmd を再帰的に呼び出す
+                const cmdfilename = cmd.file;
+                const filepath = path.resolve("/Users/qian/exercises-public/exercises/ch16/ex13", cmdfilename)
+                const stream = fs.createReadStream(filepath);
+                // sort < hello.txtでstdoutとして結果をみえる
+                await runcmd(cmd.cmd, stream, null);
+                // fs.createReadStream(filepath).pipe(process.stdout)
+
             }
             break;
 
@@ -84,6 +105,13 @@ async function runcmd(cmd, stdin = null, stdout = null) {
                 // FIXME: ここを実装してね (4行程度)
                 // HINT: cmd.left と cmd.right に対して runcmd を再帰的に呼び出し Promise.all で待つ
                 // HINT: left と right を繋ぐには new PassThrought() で作成したストリームを使用する
+                console.log("|: ", cmd)
+                // leftの出力をrightにパイプする?
+                const passThrough = new PassThrough();
+                await Promise.all([
+                    runcmd(cmd.left, null, passThrough),
+                    runcmd(cmd.right, passThrough, null)
+                ]);
             }
             break;
 
@@ -106,6 +134,7 @@ async function main() {
 
     for await (const rawLine of rl) {
         const line = rawLine.trim();
+        console.log("line: ", line)
         if (line === "") {
             rl.prompt();
             continue;
@@ -119,6 +148,7 @@ async function main() {
             }
         } else {
             const cmd = parsecmd(line);
+            // console.log("cmd: ", cmd)
             try {
                 rl.pause();
                 await runcmd(cmd);
