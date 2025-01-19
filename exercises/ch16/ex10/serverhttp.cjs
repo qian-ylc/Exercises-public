@@ -108,21 +108,27 @@ function serve(rootDirectory, port) {
 
             let writestream = fs.createWriteStream(filename);
             // bodyのストリームを受け取る方法？
-            let readstream = request.
-                console.log(request)
-            writestream.once('ready', () => {
-                readstream.pipe(writestream)
-            })
-            writestream.once('finish', () => {
+            request.pipe(writestream)
+            request.on("end", () => {
                 response.setHeader("Content-Type", type);
                 response.writeHead(200);
-                console.log("finish")
+                response.end()
             })
-            writestream.on("error", (err) => {
-                response.setHeader("Content-Type", "text/plain; charset=UTF-8");
-                response.writeHead(404);
-                response.end(err.message);
-            });
+            // let readstream = request.
+            //     console.log(request)
+            // writestream.once('ready', () => {
+            //     readstream.pipe(writestream)
+            // })
+            // writestream.once('finish', () => {
+            //     response.setHeader("Content-Type", type);
+            //     response.writeHead(200);
+            //     console.log("finish")
+            // })
+            // writestream.on("error", (err) => {
+            //     response.setHeader("Content-Type", "text/plain; charset=UTF-8");
+            //     response.writeHead(404);
+            //     response.end(err.message);
+            // });
 
         }
     });

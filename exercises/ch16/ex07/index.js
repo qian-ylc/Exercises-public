@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+// スペシャルファイル
 
 export async function checkEntry(path) {
     try {
@@ -7,6 +8,8 @@ export async function checkEntry(path) {
             return 'directory';
         } else if (stats.isFile()) {
             return 'file';
+        } else {
+            return 'other';
         }
     } catch (error) {
         // 存在しないパス

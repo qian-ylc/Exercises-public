@@ -1,0 +1,31 @@
+Arguments: 
+  /Users/qian/.nodebrew/node/v18.18.0/bin/node /opt/homebrew/Cellar/yarn/1.22.19/libexec/bin/yarn.js lint
+
+PATH: 
+  /Users/qian/.rbenv/shims:/Users/qian/.rbenv/bin:/Users/qian/.anyenv/envs/nodenv/shims:/Users/qian/.anyenv/envs/nodenv/bin:/Users/qian/.nodebrew/current/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Users/qian/.rbenv/shims:/Users/qian/.rbenv/bin:/Users/qian/.anyenv/envs/nodenv/shims:/Users/qian/.anyenv/envs/nodenv/bin:/Users/qian/.nodebrew/current/bin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/Users/qian/Library/Android/sdk/platform-tools:/opt/homebrew/bin:/Users/qian/npm-global/bin:/Users/qian/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand:/Users/qian/Library/Android/sdk/platform-tools:/opt/homebrew/bin:/Users/qian/npm-global/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.18.0
+
+Platform: 
+  darwin arm64
+
+Trace: 
+  SyntaxError: /Users/qian/exercises-public/ch171/ex01/package.json: Unexpected end of JSON input
+      at JSON.parse (<anonymous>)
+      at /opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:1629:59
+      at Generator.next (<anonymous>)
+      at step (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:310:30)
+      at /opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:321:13
+
+npm manifest: 
+  
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -80,7 +80,7 @@ async function runcmd(cmd, stdin = null, stdout = null) {
                 //     stream.write(" ")
                 // }
                 // streamをstdoutに -> case " " パイプ作成
-                await runcmd(cmd.cmd, null, stream);
+                await runcmd(cmd.cmd, stdin, stream);
                 console.log(">: ", cmd.cmd)
                 stream.end();
             }
@@ -94,7 +94,7 @@ async function runcmd(cmd, stdin = null, stdout = null) {
                 const filepath = path.resolve("/Users/qian/exercises-public/exercises/ch16/ex13", cmdfilename)
                 const stream = fs.createReadStream(filepath);
                 // sort < hello.txtでstdoutとして結果をみえる
-                await runcmd(cmd.cmd, stream, null);
+                await runcmd(cmd.cmd, stream, stdout);
                 // fs.createReadStream(filepath).pipe(process.stdout)
 
             }
@@ -109,8 +109,8 @@ async function runcmd(cmd, stdin = null, stdout = null) {
                 // leftの出力をrightにパイプする?
                 const passThrough = new PassThrough();
                 await Promise.all([
-                    runcmd(cmd.left, null, passThrough),
-                    runcmd(cmd.right, passThrough, null)
+                    runcmd(cmd.left, stdin, passThrough),
+                    runcmd(cmd.right, passThrough, stdout)
                 ]);
             }
             break;

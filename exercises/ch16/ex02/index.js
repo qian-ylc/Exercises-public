@@ -31,7 +31,7 @@ async function startChild() {
             // closeの場合いつもprocess.exit(1)?
             if (signal) {
                 console.log(`子プロセスがシグナル ${signal} によって終了`);
-                process.exit(1);
+                process.exit(0);
             } else if (code !== 0) {
                 startChild();
             }
