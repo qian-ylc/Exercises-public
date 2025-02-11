@@ -9,3 +9,4 @@ TypeScriptが主流となっている。
 参考:
 - [Flow から TypeScript に移行しました](https://texta.pixta.jp/entry/2018/06/07/120000)
 - [TypeScript vs Flow: Which one should you use for type checking?](https://codedamn.com/news/javascript/flow-vs-typescript)
+https://rfgricoh-my.sharepoint.com/:u:/r/personal/ushin_sen_jp_ricoh_com/Documents/Teams%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/teams.microsoft.com.har?csf=1&web=1&e=OYozuV

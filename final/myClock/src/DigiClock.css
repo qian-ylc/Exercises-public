@@ -1,0 +1,20 @@
+button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* デジタル時計のスタイル */
+.digi-clock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+    color: rgba(46, 48, 50, 0.913);
+    font-family: 'Digital-7', sans-serif;
+    font-size: 3rem;
+    border: 5px solid rgba(46, 48, 50, 0.913);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(146, 155, 146, 0.5);
+}
