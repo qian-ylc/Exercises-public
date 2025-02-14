@@ -1,5 +1,48 @@
-button {
+.button-container {
     position: absolute;
     top: 20px;
     right: 20px;
+
+    button {
+        margin: 10px;
+    }
+}
+
+body.light {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+
+    line {
+        stroke: var(--dark-color);
+    }
+
+    svg text {
+        fill: var(--dark-color);
+    }
+
+    svg circle {
+        stroke: var(--dark-color);
+    }
+}
+
+body.dark {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+
+    line {
+        stroke: var(--light-color);
+    }
+
+    svg text {
+        fill: var(--light-color);
+    }
+
+    svg circle {
+        stroke: var(--light-color);
+    }
+
+    button {
+        background-color: var(--light-color);
+        color: var(--light-color);
+    }
 }
