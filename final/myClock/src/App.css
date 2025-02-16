@@ -9,3 +9,23 @@
   --light-color: #f9f9f962;
   --dark-color: #213547;
 }
+
+.alarm {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  dialog {
+    top: 20px;
+    left: 150px;
+    width: 300px;
+  }
+
+  button {
+    margin: 10px;
+  }
+
+  input {
+    margin: 10px;
+  }
+}

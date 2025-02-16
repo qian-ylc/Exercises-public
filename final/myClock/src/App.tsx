@@ -15,18 +15,25 @@ function App() {
   const [time, setTime] = useState(new Date());
   const [alarmTime, setAlarmTime] = useState<string | null>(null);
   const [isAlarmRinging, setIsAlarmRinging] = useState(false);
+  const [alarmDialogOpen, setAlarmDialogOpen] = useState(false);
 
   const handleSetAlarm = (timeToBeSet: string | null) => {
     if (timeToBeSet) {
       localStorage.setItem('alarmTime', timeToBeSet);
+      setAlarmTime(timeToBeSet);
     } else {
+      // clearボタンが押された場合
       localStorage.removeItem('alarmTime');
+      const timeInput = document.querySelector('input[type="time"]');
+      if (timeInput) {
+        timeInput.value = '';
+        setAlarmTime(null);
+      }
     }
-    setAlarmTime(timeToBeSet);
   };
+
   const handleStopAlarm = () => {
     setIsAlarmRinging(false);
-    setAlarmTime(null);
   };
 
   useEffect(() => {
@@ -36,6 +43,19 @@ function App() {
 
     return () => clearInterval(interval);
   }, []);
+
+  // ページ読み込み時にlocalStorageからアラーム時刻を取得
+  useEffect(() => {
+    const savedAlarmTime = localStorage.getItem('alarmTime');
+    if (savedAlarmTime) {
+      setAlarmTime(savedAlarmTime);
+      const timeInput = document.querySelector('input[type="time"]') as HTMLInputElement;
+      if (timeInput) {
+        timeInput.value = savedAlarmTime;
+      }
+    }
+  }, []);
+
   useEffect(() => {
     if (alarmTime) {
       const [alarmHour, alarmMinute] = alarmTime.split(':').map(Number);
@@ -47,21 +67,22 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div id="alarm">
-        <input
-          type="time"
-          onChange={(e) => handleSetAlarm(e.target.value)}
-        />
-        <button onClick={() => handleSetAlarm(null)}>Clear Alarm</button>
+      <div className="alarm">
+        <button onClick={() => { setAlarmDialogOpen(true) }}>アラーム</button>
+        <dialog open={alarmDialogOpen}>
+          <h2>アラーム設定</h2>
+          <input
+            type="time"
+            onChange={(e) => handleSetAlarm(e.target.value)}
+          />
+          <button onClick={() => { handleSetAlarm(null) }}>clear</button>
+          <button onClick={() => { setAlarmDialogOpen(false) }}>閉じる</button>
+        </dialog>
       </div>
-      {isAlarmRinging && (
-        <div className="modal">
-          <div className="modal-content">
-            <p>Alarm ringing!</p>
-            <button onClick={handleStopAlarm}>OK</button>
-          </div>
-        </div>
-      )}
+      <dialog open={isAlarmRinging}>
+        <p>Alarm ringing!</p>
+        <button onClick={handleStopAlarm}>OK</button>
+      </dialog>
       <Routes>
         <Route path='/' element={<AnalogClock time={time} alarmTime={alarmTime} />} />
         <Route path='/digi' element={<DigiClock time={time} alarmTime={alarmTime} />} />
