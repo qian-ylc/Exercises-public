@@ -2,18 +2,14 @@ import React, { useEffect, useState } from 'react';
 import "./AnalogClock.css";
 import { useNavigate } from 'react-router';
 
-const AnalogClock: React.FC = () => {
-    const [time, setTime] = useState(new Date());
+interface Props {
+    alarmTime: string | null;
+    time: Date;
+}
+
+const AnalogClock: React.FC<Props> = (props) => {
     const [darkMode, setDarkMode] = useState(false);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTime(new Date());
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, []);
 
     useEffect(() => {
         if (darkMode) {
@@ -33,9 +29,9 @@ const AnalogClock: React.FC = () => {
     const minuteHandLength = radius * 0.8;
     const secondHandLength = radius * 0.9;
 
-    const hour = time.getHours() % 12;
-    const minute = time.getMinutes();
-    const second = time.getSeconds();
+    const hour = props.time.getHours() % 12;
+    const minute = props.time.getMinutes();
+    const second = props.time.getSeconds();
 
     const hourAngle = (360 / 12) * hour + (360 / 12) * (minute / 60);
     const minuteAngle = (360 / 60) * minute + (360 / 60) * (second / 60);
@@ -124,7 +120,7 @@ const AnalogClock: React.FC = () => {
                 </svg>
                 <div className="button-container">
                     <button onClick={toggleDarkMode}>{darkMode ? "light mode" : "dark mode"}</button>
-                    <button className="upperRight" onClick={handleChangePage}>アナログ時計</button>
+                    <button className="upperRight" onClick={handleChangePage}>デジタル時計</button>
                 </div>
             </div>
         </>
