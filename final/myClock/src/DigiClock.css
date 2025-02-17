@@ -31,6 +31,13 @@ body.dark {
     background-color: var(--dark-color);
     color: var(--light-color);
 
+    dialog {
+        button {
+            background-color: #efefef;
+            color: var(--dark-color);
+        }
+    }
+
     .digi-clock {
         border-color: var(--light-color);
         box-shadow: 0 0 20px rgba(146, 155, 146, 0.5);
