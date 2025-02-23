@@ -1,0 +1,23 @@
+.alarm {
+    dialog {
+        top: 20px;
+        left: 150px;
+        width: 300px;
+    }
+
+    button {
+        margin: 10px;
+    }
+
+    input {
+        margin: 10px;
+    }
+}
+
+#alarmSetting ::backdrop {
+    backdrop-filter: blur(10px);
+}
+
+.alarmRinging {
+    width: 300px;
+}

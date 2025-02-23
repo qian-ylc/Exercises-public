@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import "./DigiClock.css";
 
 interface Props {
-    alarmTime: string | null;
     time: Date;
 }
 

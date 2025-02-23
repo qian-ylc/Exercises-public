@@ -20,31 +20,6 @@
   }
 }
 
-.alarm {
-
-  dialog {
-    top: 20px;
-    left: 150px;
-    width: 300px;
-  }
-
-  button {
-    margin: 10px;
-  }
-
-  input {
-    margin: 10px;
-  }
-}
-
-#alarmSetting ::backdrop {
-  backdrop-filter: blur(10px);
-}
-
-#alarmRing {
-  width: 300px;
-}
-
 #countdown {
   font-size: 2rem;
   margin: 10px;

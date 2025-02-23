@@ -3,7 +3,6 @@ import "./AnalogClock.css";
 import { useNavigate } from 'react-router';
 
 interface Props {
-    alarmTime: string | null;
     time: Date;
 }
 
