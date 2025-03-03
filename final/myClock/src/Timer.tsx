@@ -11,6 +11,10 @@ const Timer: React.FC = () => {
     const [play, { stop }] = useSound(alarmSound);
     const [timer, setTimer] = useState<number | null>(null);
     const [countdown, setCountdown] = useState<string>('00:00:00');
+    // https://rios-studio.com/tech/react-hook%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8Btimeout%E3%81%A8timeinterval%E3%80%90%E6%AD%A2%E3%81%BE%E3%82%89%E3%81%AA%E3%81%84%E3%83%BB%E9%87%8D%E8%A4%87%E3%81%99%E3%82%8B%E3%80%91
+    // Ref: レンダーを跨いで情報を保存
+    // ボタンを押したときにインターバルを停止するために、インターバル ID を保持しておく
+    // そのため、timerRef という Ref を作成し、その中にインターバル ID を保持
     const timerRef = useRef<NodeJS.Timeout | null>(null);
     const [timerCountdowning, setTimerCountdowning] = useState(false);
 
@@ -38,11 +42,13 @@ const Timer: React.FC = () => {
     };
 
     const startTimer = () => {
+        // 既存タイマーをクリア
         if (timerRef.current) {
             clearInterval(timerRef.current);
         }
         timerRef.current = setInterval(() => {
             setTimer(prev => {
+                // prevを1秒ずつ減らす -> timer
                 if (prev === null || prev <= 0) {
                     if (timerRef.current) {
                         clearInterval(timerRef.current);
@@ -54,6 +60,7 @@ const Timer: React.FC = () => {
         }, 1000);
     };
 
+    // timerの値に基づいてcountdownを更新
     useEffect(() => {
         if (timer !== null) {
             const hours = Math.floor(timer / 3600);
@@ -65,6 +72,7 @@ const Timer: React.FC = () => {
         }
     }, [timer]);
 
+    // countdownが00:00:00&タイマーが動いていたら、タイマーを止めてアラームを鳴らす
     useEffect(() => {
         if (countdown === '00:00:00' && timerCountdowning) {
             const dialog: HTMLDialogElement | null = document.querySelector('.timerRinging');
@@ -90,6 +98,7 @@ const Timer: React.FC = () => {
         if (timerRef.current) {
             clearInterval(timerRef.current);
         }
+        setTimerCountdowning(false);
     };
 
     const handleTimerClear = () => {
